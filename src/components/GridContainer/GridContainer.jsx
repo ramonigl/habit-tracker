@@ -1,8 +1,8 @@
-import './GridContainer.css';
+import styles from './GridContainer.module.css';
 
 function GridContainer({ className, children }) {
     return (
-        <div className={`grid-container ${className}`}>
+        <div className={`${styles.gridContainer} ${className ? styles[className] : ''}`}>
             {children}
         </div >
     );
