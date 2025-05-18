@@ -1,13 +1,13 @@
 import styles from './BtnAddCategorias.module.css';
 
-function BtnAddCategoria(props) {
+function BtnAddCategorias(props) {
     return (
         <>
-            <button className={styles.btn}>
+            <button className={styles.btn} onClick={props.onClick}>
                 <span>{props.text}</span>
             </button>
         </>
     );
 }
 
-export default BtnAddCategoria;
+export default BtnAddCategorias;

@@ -1,17 +1,13 @@
 .btn {
-    font-size: 1.5em;
+    font-size: 0.8em;
     background-color: #ccc;
     color: rgb(107, 107, 107);
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    padding: 0;
+    border-radius: 50px;
+    padding: 8px 16px;
 
     border: none;
 
-    order: 999;
-    flex-shrink: 0;
-
+    max-width: fit-content;
 }
 
 .btn:hover {

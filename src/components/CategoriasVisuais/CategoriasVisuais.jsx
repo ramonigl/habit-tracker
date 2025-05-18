@@ -4,7 +4,7 @@ function CategoriasVisuais() {
     return (
         <>
             <div id="categorias-visuais">
-                <BtnAddCategorias text="+"/>
+                ra
             </div>
         </>
     );

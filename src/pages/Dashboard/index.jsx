@@ -2,7 +2,7 @@ import styles from './style.module.css';
 import GridContainer from '../../components/GridContainer/GridContainer.jsx';
 import Card from '../../components/Card/Card.jsx'
 import CategoriasVisuais from '../../components/CategoriasVisuais/CategoriasVisuais.jsx'
-import NovaCategoriaForm from '../../components/Forms/NovaCategoriaForm.jsx';
+import MostraFormCategorias from '../../components/Events/MostraFormCategorias/MostraFormCategorias.jsx';
 import RegistrarAtividadeForm from '../../components/Forms/RegistrarAtividadeForm.jsx';
 
 function Dashboard() {
@@ -15,8 +15,8 @@ function Dashboard() {
                 <Card>
                     <div className={styles.subitem}>
                         <h2>Categorias</h2>
-                        <CategoriasVisuais />
-                        <NovaCategoriaForm/>
+                        {/*<CategoriasVisuais />*/}
+                        <MostraFormCategorias />
                     </div>
                     <div className={styles.subitem}>
                         <h2>Registrar Atividade</h2>
