@@ -24,7 +24,8 @@
     font-weight: 600;
     transition: background-color 0.3s ease;
 
-    &:hover {
-        background-color: #0056b3;
-    }
+}
+
+.buttonLink:hover {
+    background-color: #0056b3;
 }

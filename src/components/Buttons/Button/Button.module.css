@@ -1,4 +1,4 @@
-button {
+.btn {
   padding: 10px 20px;
   background-color: #007bff;
   color: white;
@@ -10,5 +10,8 @@ button {
 
   align-self: center;
   width: 100%;
-  max-width: 300px;
+}
+
+.btn:hover {
+  background-color: #0056b3;
 }

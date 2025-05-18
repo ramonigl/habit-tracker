@@ -1,0 +1,13 @@
+.inputBox input, 
+.inputSelect select {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.inputSelect select:invalid {
+  color: #aaa; /* cor do "placeholder" */
+}

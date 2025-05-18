@@ -11,3 +11,8 @@ body {
     padding: 16px;
     box-sizing: border-box;
 }
+
+h2 {
+    margin: 0px 0px 0px;
+    color: black;
+}
