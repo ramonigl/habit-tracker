@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import PageContainer from '../../components/grids/PageContainer/PageContainer.jsx';
 import Categoria from '../../components/Categoria/Categoria.jsx';
 import Card from '../../components/Card/Card.jsx'
@@ -10,14 +11,7 @@ import styles from './style.module.css';
 
 
 function Categorias() {
-    const [categorias, setCategorias] = useState([]);
-
-    useEffect(() => {
-        const stored = localStorage.getItem('categorias');
-        if (stored) {
-            setCategorias(JSON.parse(stored));
-        }
-    }, []);
+     const categorias = useSelector(state => state.categorias.categorias);
 
     return (
         <>

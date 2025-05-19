@@ -1,55 +1,64 @@
-import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { removerAtividade } from '../../store/atividadesSlice';
 import style from './TabelaAtividades.module.css';
 
 function TabelaAtividades({ idBuscado }) {
-    const [categoria, setCategoria] = useState(null);
-    const [atividadesDaCategoria, setAtividadesDaCategoria] = useState([]);
+    const categorias = useSelector(state => state.categorias.categorias);
+    const atividades = useSelector(state => state.atividades.atividades);
+    const dispatch = useDispatch();
 
-    useEffect(() => {
-        const categorias = JSON.parse(localStorage.getItem('categorias')) || [];
-        const cat = categorias.find(cat => String(cat.id) === String(idBuscado));
-        setCategoria(cat);
-
-        const atividades = JSON.parse(localStorage.getItem('atividades')) || [];
-        const filtradas = atividades.filter(at => String(at.categoriaId) === String(idBuscado));
-        setAtividadesDaCategoria(filtradas);
-    }, [idBuscado]);
+    const categoria = categorias.find(cat => String(cat.id) === String(idBuscado));
+    const atividadesDaCategoria = atividades.filter(at => String(at.categoriaId) === String(idBuscado));
 
     if (!categoria) return <p>Categoria não encontrada.</p>;
 
     return (
-        <>
-            <div className={style.tabelaWrapper}>
-                <table className={style.tabela}>
-                    <thead>
+        <div className={style.tabelaWrapper}>
+            <table className={style.tabela}>
+                <thead>
+                    <tr>
+                        <th>Atividades</th>
+                        <th>Tempo</th>
+                        <th>Data</th>
+                        <th>Excluir</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {atividadesDaCategoria.length === 0 ? (
                         <tr>
-                            <th>Atividades</th>
-                            <th>Tempo</th>
-                            <th>Data</th>
-                            <th>Excluir</th>
+                            <td colSpan="4">Nenhuma atividade cadastrada.</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        {atividadesDaCategoria.length === 0 ? (
-                            <tr>
-                                <td colSpan="4">Nenhuma atividade cadastrada.</td>
+                    ) : (
+                        atividadesDaCategoria.map((at, i) => (
+                            <tr key={i} className={style.lista}>
+                                <td>{at.nome}</td>
+                                <td>{at.tempo}</td>
+                                <td>{at.data}</td>
+                                <td>
+                                    <button
+                                        type="button"
+                                        className={style.botaoApagar}
+                                        onClick={() => {
+                                            // Encontra o índice global da atividade para remover corretamente
+                                            const idx = atividades.findIndex(
+                                                a =>
+                                                    a.nome === at.nome &&
+                                                    a.categoriaId === at.categoriaId &&
+                                                    a.tempo === at.tempo &&
+                                                    a.data === at.data
+                                            );
+                                            if (idx !== -1) dispatch(removerAtividade(idx));
+                                        }}
+                                    >
+                                        Apagar
+                                    </button>
+                                </td>
                             </tr>
-                        ) : (
-                            atividadesDaCategoria.map((at, i) => (
-                                <tr key={i} className={style.lista}>
-                                    <td>{at.nome}</td>
-                                    <td>{at.tempo}</td>
-                                    <td>{at.data}</td>
-                                    <td>
-                                        <button type="button" className={style.botaoApagar}>Apagar</button>
-                                    </td>
-                                </tr>
-                            ))
-                        )}
-                    </tbody>
-                </table>
-            </div>
-        </>
+                        ))
+                    )}
+                </tbody>
+            </table>
+        </div>
     );
 }
 

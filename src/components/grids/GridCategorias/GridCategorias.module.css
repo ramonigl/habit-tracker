@@ -3,7 +3,7 @@
     grid-template-columns: repeat(auto-fit, minmax(100px, 170px));
 
     gap: 15px;
-    max-height: 90vh;
+    max-height: 100%;
 
     box-sizing: border-box;
     padding: 16px;

@@ -1,8 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { adicionarAtividade } from '../../store/atividadesSlice';
 import formStyles from './Form.module.css';
 import InputBox from '../Inputs/InputBox.jsx';
 import InputSelect from '../Inputs/InputSelect.jsx';
 import Button from '../Buttons/Button/Button';
+
 
 function RegistrarAtividadeForm() {
     const [nome, setNome] = useState('');
@@ -10,27 +13,14 @@ function RegistrarAtividadeForm() {
     const [tempo, setTempo] = useState('');
     const [data, setData] = useState('');
 
-    const [categorias, setCategorias] = useState([]);
+    const categorias = useSelector(state => state.categorias.categorias);
+    const dispatch = useDispatch();
 
-    useEffect(() => {
-        const stored = JSON.parse(localStorage.getItem('categorias')) || [];
-        setCategorias(stored);
-    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        const atividade = {
-            nome,
-            categoriaId,
-            tempo,
-            data
-        };
-
-        const atividades = JSON.parse(localStorage.getItem('atividades')) || [];
-        atividades.push(atividade);
-        localStorage.setItem('atividades', JSON.stringify(atividades));
-
+        const atividade = { nome, categoriaId, tempo, data };
+        dispatch(adicionarAtividade(atividade));
         setNome('');
         setCategoriaId('');
         setTempo('');

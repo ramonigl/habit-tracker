@@ -1,11 +1,13 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { adicionarCategoria } from '../../store/CategoriasSlice.js'; // ajuste o caminho!
 import formStyles from './Form.module.css'
 import InputBox from '../Inputs/InputBox.jsx';
 import Button from '../Buttons/Button/Button.jsx';
 
-function NovaCategoriaForm({ onSubmitSuccess }) {
-
+function NovaCategoriaForm() {
     const [nomeCategoria, setNomeCategoria] = useState('');
+    const dispatch = useDispatch();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -14,14 +16,9 @@ function NovaCategoriaForm({ onSubmitSuccess }) {
             id: Date.now(),
             nome: nomeCategoria
         };
-
-        const categorias = JSON.parse(localStorage.getItem('categorias')) || [];
-        categorias.push(categoria);
-        localStorage.setItem('categorias', JSON.stringify(categorias));
-
+        dispatch(adicionarCategoria(categoria));
         setNomeCategoria('');
 
-        if (onSubmitSuccess) onSubmitSuccess();
     };
 
     return (
