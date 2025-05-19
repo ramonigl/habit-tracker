@@ -1,0 +1,20 @@
+.dashboard {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    height: 90vh;
+}
+
+.categorias {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 15px;
+    height: 90vh;
+}
+
+.cabecalho {
+    display: flex;
+    flex-direction: row;
+    margin-left: 16px;
+    gap: 10px;
+}

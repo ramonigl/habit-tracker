@@ -1,22 +1,28 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import formStyles from './Form.module.css';
 import InputBox from '../Inputs/InputBox.jsx';
 import InputSelect from '../Inputs/InputSelect.jsx';
 import Button from '../Buttons/Button/Button';
 
 function RegistrarAtividadeForm() {
-
     const [nome, setNome] = useState('');
-    const [categoria, setCategoria] = useState('');
+    const [categoriaId, setCategoriaId] = useState('');
     const [tempo, setTempo] = useState('');
     const [data, setData] = useState('');
+
+    const [categorias, setCategorias] = useState([]);
+
+    useEffect(() => {
+        const stored = JSON.parse(localStorage.getItem('categorias')) || [];
+        setCategorias(stored);
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         const atividade = {
             nome,
-            categoria,
+            categoriaId,
             tempo,
             data
         };
@@ -26,10 +32,10 @@ function RegistrarAtividadeForm() {
         localStorage.setItem('atividades', JSON.stringify(atividades));
 
         setNome('');
-        setCategoria('');
+        setCategoriaId('');
         setTempo('');
         setData('');
-    }
+    };
 
     return (
         <form id="form-atividade" onSubmit={handleSubmit}>
@@ -46,18 +52,19 @@ function RegistrarAtividadeForm() {
                         onChange={(e) => setNome(e.target.value)}
                     />
                     <InputSelect
-                        type="select"
                         id="select-categoria"
                         name="selectCategoria"
                         label="Categoria"
-                        value={categoria}
+                        value={categoriaId}
                         required
                         options={[
                             { value: '', label: 'Selecione uma categoria' },
-                            { value: 'estudos', label: 'Estudos' },
-                            { value: 'trabalho', label: 'Trabalho' },
-                            { value: 'lazer', label: 'Lazer' }]}
-                        onChange={(e) => setCategoria(e.target.value)}
+                            ...categorias.map(cat => ({
+                                value: cat.id,
+                                label: cat.nome
+                            }))
+                        ]}
+                        onChange={(e) => setCategoriaId(e.target.value)}
                     />
                 </div>
                 <div className={formStyles.formGroup}>

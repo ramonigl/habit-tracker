@@ -5,18 +5,21 @@ import Button from '../Buttons/Button/Button.jsx';
 
 function NovaCategoriaForm({ onSubmitSuccess }) {
 
-    const [categoria, setCategoria] = useState('');
+    const [nomeCategoria, setNomeCategoria] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (!categoria.trim()) return;
+        const categoria = {
+            id: Date.now(),
+            nome: nomeCategoria
+        };
 
         const categorias = JSON.parse(localStorage.getItem('categorias')) || [];
         categorias.push(categoria);
         localStorage.setItem('categorias', JSON.stringify(categorias));
 
-        setCategoria('');
+        setNomeCategoria('');
 
         if (onSubmitSuccess) onSubmitSuccess();
     };
@@ -30,8 +33,8 @@ function NovaCategoriaForm({ onSubmitSuccess }) {
                 name="categoria"
                 required
                 placeholder="Ex.: Estudos"
-                value={categoria}
-                onChange={(e) => setCategoria(e.target.value)}
+                value={nomeCategoria}
+                onChange={(e) => setNomeCategoria(e.target.value)}
             />
             <Button type="submit" text="Adicionar Categoria" className="btn" />
         </form>

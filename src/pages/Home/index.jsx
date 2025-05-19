@@ -6,7 +6,7 @@ function Home() {
     return (
         <>
             <div className={styles.container}>
-                <Card>
+                <Card className="container">
                     <div className={styles.subitem}>
                         <h1>Habit Tracker</h1>
                     </div>

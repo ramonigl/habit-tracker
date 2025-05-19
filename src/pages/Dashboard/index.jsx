@@ -1,29 +1,15 @@
 import styles from './style.module.css';
-import GridContainer from '../../components/GridContainer/GridContainer.jsx';
+import PageContainer from '../../components/grids/PageContainer/PageContainer.jsx';
 import Card from '../../components/Card/Card.jsx'
-import CategoriasVisuais from '../../components/CategoriasVisuais/CategoriasVisuais.jsx'
-import MostraFormCategorias from '../../components/Events/MostraFormCategorias/MostraFormCategorias.jsx';
-import RegistrarAtividadeForm from '../../components/Forms/RegistrarAtividadeForm.jsx';
 
 function Dashboard() {
     return (
         <>
-            <h1>Dashboard</h1>
-            <GridContainer className="dashboard">
-                <Card>
+            <PageContainer titulo="Dashboard" className="dashboard">
+                <Card className="container">
                 </Card>
-                <Card>
-                    <div className={styles.subitem}>
-                        <h2>Categorias</h2>
-                        {/*<CategoriasVisuais />*/}
-                        <MostraFormCategorias />
-                    </div>
-                    <div className={styles.subitem}>
-                        <h2>Registrar Atividade</h2>
-                        <RegistrarAtividadeForm />
-                    </div>
-                </Card>
-            </GridContainer>
+                
+            </PageContainer>
         </>
     );
 }

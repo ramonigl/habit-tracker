@@ -1,0 +1,13 @@
+.subitem { /*subitem generico*/
+  display: flex;
+  flex-direction: column;
+
+  gap: 16px;
+  margin-top: 8px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  box-sizing: border-box;
+}
+
