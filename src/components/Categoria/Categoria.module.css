@@ -34,8 +34,14 @@
 
 .cabecalhoModal {
     display: flex;
-    justify-content: space-between; /* ou space-between, dependendo do conteúdo */
+    justify-content: space-between;
     width: 100%;
+}
+
+.acoes {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
 }
 
 .fechar {
@@ -57,7 +63,23 @@
     color: #ffffff;
 }
 
+.excluir {
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    padding: 5px 10px;     
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 10px;    
+    transition: background-color 0.2s ease;
+}
+
 .idCategoria {
-    font-size: 0.8em;
+    font-size: 11px;
     color: #969696;
+}
+
+.tempoCategoria {
+    font-size: 15px;
+    color: #000000;
 }

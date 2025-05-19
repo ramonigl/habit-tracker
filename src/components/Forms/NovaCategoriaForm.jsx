@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { adicionarCategoria } from '../../store/CategoriasSlice.js'; // ajuste o caminho!
+import { adicionarCategoria } from '../../store/categSlice.js';
 import formStyles from './Form.module.css'
 import InputBox from '../Inputs/InputBox.jsx';
 import Button from '../Buttons/Button/Button.jsx';
@@ -14,7 +14,8 @@ function NovaCategoriaForm() {
 
         const categoria = {
             id: Date.now(),
-            nome: nomeCategoria
+            nome: nomeCategoria,
+            tempo: 0,
         };
         dispatch(adicionarCategoria(categoria));
         setNomeCategoria('');

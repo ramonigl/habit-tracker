@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { removerAtividade } from '../../store/atividadesSlice';
+import { removerAtividadeEAtualizarTempo } from '../../store/atividadesSlice';
 import style from './TabelaAtividades.module.css';
 
 function TabelaAtividades({ idBuscado }) {
@@ -32,14 +32,13 @@ function TabelaAtividades({ idBuscado }) {
                         atividadesDaCategoria.map((at, i) => (
                             <tr key={i} className={style.lista}>
                                 <td>{at.nome}</td>
-                                <td>{at.tempo}</td>
+                                <td>{at.tempo} min</td>
                                 <td>{at.data}</td>
                                 <td>
                                     <button
                                         type="button"
                                         className={style.botaoApagar}
                                         onClick={() => {
-                                            // Encontra o índice global da atividade para remover corretamente
                                             const idx = atividades.findIndex(
                                                 a =>
                                                     a.nome === at.nome &&
@@ -47,7 +46,7 @@ function TabelaAtividades({ idBuscado }) {
                                                     a.tempo === at.tempo &&
                                                     a.data === at.data
                                             );
-                                            if (idx !== -1) dispatch(removerAtividade(idx));
+                                            if (idx !== -1) dispatch(removerAtividadeEAtualizarTempo(at, idx));
                                         }}
                                     >
                                         Apagar

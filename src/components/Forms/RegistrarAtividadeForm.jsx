@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { adicionarAtividade } from '../../store/atividadesSlice';
+
+import { adicionarAtividadeEAtualizarTempo } from '../../store/atividadesSlice';
+
 import formStyles from './Form.module.css';
 import InputBox from '../Inputs/InputBox.jsx';
 import InputSelect from '../Inputs/InputSelect.jsx';
@@ -19,8 +21,10 @@ function RegistrarAtividadeForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const atividade = { nome, categoriaId, tempo, data };
-        dispatch(adicionarAtividade(atividade));
+        const atividade = { nome, categoriaId, tempo: Number(tempo), data };
+
+        dispatch(adicionarAtividadeEAtualizarTempo(atividade));
+        
         setNome('');
         setCategoriaId('');
         setTempo('');
