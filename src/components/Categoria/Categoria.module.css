@@ -34,31 +34,40 @@
 
 .cabecalhoModal {
     display: flex;
-    justify-content: space-between;
     width: 100%;
+
+    align-items: center;
+    gap: 12px;
 }
 
 .acoes {
     display: flex;
     justify-content: space-between;
-    width: 80%;
+    width: 100%;
+
+    align-items: center;
 }
 
-.fechar {
-    align-self: flex-end;
 
-    font-size: 0.8em;
+.btnFechar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     background-color: #ccc;
     color: rgb(49, 49, 49);
-    border-radius: 50px;
-    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 50%;
+    padding: 6px;
 
     border: none;
 
-    max-width: fit-content;
+    width: 30px;
+    height: 30px;
+
 }
 
-.fechar:hover {
+.btnFechar:hover {
     background-color: gray;
     color: #ffffff;
 }
@@ -67,11 +76,13 @@
     background-color: #ff4d4f;
     color: white;
     border: none;
-    padding: 5px 10px;     
+    padding: 5px 10px;
     border-radius: 6px;
     cursor: pointer;
-    font-size: 10px;    
+    font-size: 10px;
     transition: background-color 0.2s ease;
+
+    height: fit-content;
 }
 
 .idCategoria {

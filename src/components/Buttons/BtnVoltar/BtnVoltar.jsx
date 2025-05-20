@@ -1,5 +1,8 @@
 import styles from './BtnVoltar.module.css';
 import { useNavigate } from 'react-router-dom';
+import { IoIosArrowBack } from 'react-icons/io';
+
+
 
 function BtnVoltar() {
     const navigate = useNavigate();
@@ -9,9 +12,11 @@ function BtnVoltar() {
     };
 
     return (
+
         <button type="button" className={styles.btn} onClick={handleVoltar}>
-            voltar
+            <IoIosArrowBack size={22}/>
         </button>
+
     );
 }
 

@@ -8,9 +8,9 @@ function PageContainer({ className, children, titulo }) {
                 <BtnVoltar />
                 <h1>{titulo}</h1>
             </div>
-                <div className={styles[className]}>
-                    {children}
-                </div >
+            <div className={styles[className]}>
+                {children}
+            </div >
         </>
     );
 }

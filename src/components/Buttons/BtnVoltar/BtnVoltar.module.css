@@ -1,13 +1,18 @@
 .btn {
-    font-size: 0.8em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     background-color: #ccc;
     color: rgb(49, 49, 49);
-    border-radius: 50px;
-    padding: 8px 12px;
 
+    border-radius: 50%;
     border: none;
 
-    max-width: fit-content;
+    text-align: center;
+
+    width: 30px;
+    height: 30px;
 }
 
 .btn:hover {
