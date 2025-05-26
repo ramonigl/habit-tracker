@@ -1,11 +1,12 @@
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PageContainer from "../../components/grids/PageContainer/PageContainer";
 import Card from "../../components/Card/Card";
 import Button from "../../components/Buttons/Button/Button";
 import InputSelect from "../../components/Inputs/InputSelect";
 import InputBox from "../../components/Inputs/InputBox";
-import style from './style.module.css'
+import style from './style.module.css';
+import BtnExcluir from '../../components/Buttons/BtnExcluir/BtnExcluir';
 
 function formatarTempo(minutos) {
     const h = Math.floor(minutos / 60);
@@ -15,13 +16,20 @@ function formatarTempo(minutos) {
     return `${m}min`;
 }
 
+
+
 function Metas() {
     const categorias = useSelector(state => state.categorias.categorias);
     const [categoriaId, setCategoriaId] = useState('');
     const [tempo, setTempo] = useState('');
+    const [metas, setMetas] = useState(() => {
+        return JSON.parse(localStorage.getItem('metas')) || [];
+    });
 
-    const getMetas = () => JSON.parse(localStorage.getItem('metas')) || [];
-    const saveMetas = (metas) => localStorage.setItem('metas', JSON.stringify(metas));
+    // Atualiza localStorage sempre que metas mudar
+    useEffect(() => {
+        localStorage.setItem('metas', JSON.stringify(metas));
+    }, [metas]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -33,13 +41,19 @@ function Metas() {
             tempo: Number(tempo)
         };
 
-        const metas = getMetas();
-        metas.push(novaMeta);
-        saveMetas(metas);
+        const metasAtualizadas = [...metas, novaMeta];
+        setMetas(metasAtualizadas);
 
         setCategoriaId('');
         setTempo('');
         alert('Meta criada com sucesso!');
+    };
+
+    // Função para remover uma meta pelo id
+    const removerMeta = (id) => {
+        const metasAtualizadas = metas.filter(meta => meta.id !== id);
+        setMetas(metasAtualizadas);
+        localStorage.setItem('metas', JSON.stringify(metasAtualizadas)); // Atualiza o localStorage ao remover
     };
 
     return (
@@ -48,10 +62,10 @@ function Metas() {
                 <Card className="container">
                     <h2>Metas criadas</h2>
                     <div className={style.metasList}>
-                        {getMetas().length === 0 ? (
+                        {metas.length === 0 ? (
                             <p>Nenhuma meta criada ainda.</p>
                         ) : (
-                            getMetas().map(meta => {
+                            metas.map(meta => {
                                 const categoria = categorias.find(cat => String(cat.id) === String(meta.categoriaId));
                                 return (
                                     <Card key={meta.id} className="container" style={{ marginBottom: '16px' }}>
@@ -61,7 +75,7 @@ function Metas() {
                                         {categoria && (
                                             <>
                                                 <p>
-                                                    Cumprido: <strong>{categoria.tempo || 0}</strong> / <strong>{meta.tempo}</strong> minutos
+                                                    Cumprido: <strong>{formatarTempo(categoria.tempo || 0)}</strong> / <strong>{formatarTempo(meta.tempo)}</strong>
                                                 </p>
                                                 {/* Barra de progresso */}
                                                 <div style={{
@@ -76,7 +90,7 @@ function Metas() {
                                                         background: '#4caf50',
                                                         width: `${Math.min(100, (categoria.tempo || 0) / meta.tempo * 100)}%`,
                                                         height: '100%',
-                                                        transition: 'width 0.3s'
+                                                        transition: 'width 0.3s ease'
                                                     }} />
                                                 </div>
                                             </>
@@ -84,6 +98,7 @@ function Metas() {
                                         {!categoria && (
                                             <p>Categoria removida</p>
                                         )}
+                                        <BtnExcluir text="Excluir" onClick={() => removerMeta(meta.id)}/>
                                     </Card>
                                 );
                             })

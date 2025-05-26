@@ -72,19 +72,6 @@
     color: #ffffff;
 }
 
-.excluir {
-    background-color: #ff4d4f;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 10px;
-    transition: background-color 0.2s ease;
-
-    height: fit-content;
-}
-
 .idCategoria {
     font-size: 11px;
     color: #969696;
